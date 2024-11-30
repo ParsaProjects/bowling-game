@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.game-area {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.bowling-lane {
+    width: 300px;
+    height: 400px;
+    margin: 20px auto;
+    background: repeating-linear-gradient(
+        90deg,
+        #d4b48c 0px,
+        #d4b48c 20px,
+        #c4a47c 20px,
+        #c4a47c 40px
+    );
+    border: 8px solid #8b4513;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    perspective: 500px;
+    transform: rotateX(5deg);
+}
+
+.bowling-lane::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.bowling-lane::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+}
+
+.pins-area {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(245, 245, 245, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.pin-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.pin {
+    width: 15px;
+    height: 25px;
+    margin: 0 8px;
+    background: linear-gradient(to bottom, 
+        #fff 60%, 
+        #ddd 100%);
+    border: 1px solid #ccc;
+    border-radius: 40% 40% 20% 20%;
+    position: relative;
+    transition: transform 0.3s ease-out;
+}
+
+.pin::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 5px;
+    background: #ccc;
+    border-radius: 0 0 50% 50%;
+}
+
+.pin.knocked {
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+.bowling-ball {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 35% 35%, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(0, 0, 0, 0.5) 60%);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transition: transform 0.1s ease-out;
+}
+
+.controls {
+    margin: 20px 0;
+}
+
+.power-meter {
+    width: 200px;
+    height: 15px;
+    background-color: #f5f5f5;
+    margin: 10px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    position: relative;
+}
+
+.power-meter::before {
+    content: '';
+    position: absolute;
+    left: 47%;
+    right: 47%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-left: 2px dashed #4CAF50;
+    border-right: 2px dashed #4CAF50;
+    z-index: 1;
+}
+
+.power-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50;
+    transition: background-color 0.2s ease;
+    position: relative;
+    z-index: 0;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.scoreboard {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+#frames {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.frames {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    margin: 10px 0;
+}
+
+.frame {
+    background: #f5f5f5;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.frame-number {
+    font-size: 12px;
+    color: #666;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2px;
+}
+
+.throws {
+    font-size: 14px;
+    min-height: 20px;
+    padding: 2px 0;
+}
+
+.frame-score {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    border-top: 1px solid #ddd;
+    padding-top: 2px;
+}
+
+.total-score {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.player-scores {
+    margin: 10px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 5px;
+    background: #e0e0e0;
+    border-radius: 4px;
+}
+
+.current-player {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 8px;
+    margin: 10px auto;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
