@@ -2,6 +2,8 @@
 
 A fun, interactive two-player bowling game built with vanilla JavaScript. Play with your friends and enjoy a realistic bowling experience right in your browser!
 
+🎮 [Play the Game Now!](https://parsaprojects.github.io/bowling-game/)
+
 ## Features
 - Two-player gameplay
 - Realistic bowling mechanics
